@@ -41,7 +41,7 @@ class SignaturePad extends Component {
 
     constructor(props) {
         super(props);
-        var escapedName = props.name.replace(/"/, `\\"`);
+        var escapedName = props.name ? props.name.replace(/"/, `\\"`) : undefined;
         this.state = {base64DataUrl: props.dataURL || null, name: escapedName};
         const {backgroundColor} = StyleSheet.flatten(props.style);
         var injectedJavaScript = injectedExecuteNativeFunction
