@@ -163,10 +163,17 @@ function SignaturePad(canvas, options) {
       self._strokeBegin(touch);
     }
   };
+  
+  this.moveTimeout = null;
 
   this._handleTouchMove = function (event) {
     /* Prevent scrolling. */
     event.preventDefault();
+   
+   clearTimeout(self.moveTimeout);
+   self.moveTimeout = setTimeout(function() {
+        self._handleTouchEnd(event);
+   }, 100);
 
     var touch = event.targetTouches[0];
     self._strokeMoveUpdate(touch);
